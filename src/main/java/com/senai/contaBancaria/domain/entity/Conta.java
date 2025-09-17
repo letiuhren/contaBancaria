@@ -2,21 +2,39 @@ package com.senai.contaBancaria.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+import java.math.BigDecimal;
 import java.util.List;
 
-@MappedSuperclass
+
 @Entity
 @Data
-public class Conta{
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_conta", discriminatorType = DiscriminatorType.STRING, length = 20)
+@Table (name = "conta",
+    uniqueConstraints = {
+        @UniqueConstraint(name = "uk_conta_numero", columnNames = "numero"),
+        @UniqueConstraint(name = "uk_cliente_tipo", columnNames = {"cliente_id", "tipo_conta"})
+    }
+)
+
+@SuperBuilder
+@NoArgsConstructor
+public abstract class Conta{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
-
+    private String id;// classe repper é o que representa, que são classes que podem ser nulas ou não
+    @Column (nullable = false, length = 20)
     private String numero;
+    @Column (nullable = false, precision = 4)
+    private BigDecimal saldo;
+    @Column (nullable = false)
+    private Boolean ativa;
 
-    private int saldo;
-
-    @OneToOne(mappedBy = "cliente")
-    private List<Cliente> cliente;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn (name = "cliente_id", foreignKey = @ForeignKey(name="fk_conta_cliente"))
+    private Cliente cliente;
 
 }

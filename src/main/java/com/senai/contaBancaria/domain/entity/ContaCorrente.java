@@ -1,15 +1,22 @@
 package com.senai.contaBancaria.domain.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 @EqualsAndHashCode(callSuper = true)
-@MappedSuperclass
+@DiscriminatorValue("CORRENTE")
 @Data
+@NoArgsConstructor
+
 public class ContaCorrente extends Conta {
-
-    private Long limite;
-
-    private double taxa;
+    @Column(precision = 19, scale = 2)
+    private BigDecimal limite;
+    @Column (precision = 19, scale = 2)
+    private BigDecimal taxa;
 }

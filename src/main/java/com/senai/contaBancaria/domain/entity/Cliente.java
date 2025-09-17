@@ -3,21 +3,39 @@ package com.senai.contaBancaria.domain.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(
+        name = "cliente",
+        uniqueConstraints = @UniqueConstraint(name="uk_cliente_cpf", columnNames = "cpf")
+)
+
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @NotBlank(message = "Nome é obrigatório")
-    @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100")
+    @Column (nullable = false, length = 120)
     private String nome;
 
+    @Column (nullable = false, length = 11)
     private Long cpf;
 
-    private String contas;
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    //cascade para criar o relacionamnto entre cliente e conta, criando simultaneamente. Além de, quando apagar o cliente, apagar todas as contas relacionadas.
+    private List<Conta> contas;
+
+    @Column (nullable = false)
+    private boolean ativo;//indica se a conta/cliente está ativo ou inativo
 
 }
