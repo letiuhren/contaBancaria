@@ -1,8 +1,6 @@
 package com.senai.contaBancaria.domain.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,7 +27,7 @@ public class Cliente {
     private String nome;
 
     @Column (nullable = false, length = 11)
-    private Long cpf;
+    private String cpf;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     //cascade para criar o relacionamnto entre cliente e conta, criando simultaneamente. Além de, quando apagar o cliente, apagar todas as contas relacionadas.
