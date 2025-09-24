@@ -5,10 +5,7 @@ import com.senai.contaBancaria.apliation.dto.ClienteResponseDTO;
 import com.senai.contaBancaria.apliation.service.ClienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -26,5 +23,10 @@ public class ClienteController {
         return ResponseEntity.created(
                 URI.create("/api/cliente/cpf"+ novoCliente.cpf())
         ).body(novoCliente);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ClienteResponseDTO>> listarClientesAtivos(){
+        return ResponseEntity.ok(service.listarClientesAtivos());
     }
 }
