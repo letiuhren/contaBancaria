@@ -6,6 +6,7 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
@@ -13,10 +14,15 @@ import java.math.BigDecimal;
 @DiscriminatorValue("CORRENTE")
 @Data
 @NoArgsConstructor
-
+@SuperBuilder
 public class ContaCorrente extends Conta {
     @Column(precision = 19, scale = 2)
     private BigDecimal limite;
     @Column (precision = 19, scale = 2)
     private BigDecimal taxa;
+
+    @Override
+    public String getTipo() {
+        return "CORRENTE";
+    }
 }

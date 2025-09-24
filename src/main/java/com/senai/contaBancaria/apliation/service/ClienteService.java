@@ -17,10 +17,21 @@ public class ClienteService {
     public ClienteResponseDTO registrarClienteOuAnexarConta(ClienteRegistroDTO dto){
 
         var cliente = repository.findByCpfAndAtivoTrue(dto.cpf()).orElseGet(
-                () -> repository.save(dto.toEntity)
-        )
+                () -> repository.save(dto.toEntity())
+        );
 
-        return null;
+        var contas = cliente.getContas();
+        var novaConta = dto.contaDTO().toEntity(cliente);
+
+        boolean jaTemTipo = contas.stream()
+                .anyMatch(c -> c.getClass().equals(novaConta.getClass()) && c.isAtiva());
+
+        if(jaTemTipo)
+            throw new RuntimeException("Cliente já possui uma conta ativa desse tipo");
+
+        cliente.getContas().add(novaConta);
+
+        return ClienteResponseDTO.fromEntity(repository.save(cliente));
 
     }
 }
