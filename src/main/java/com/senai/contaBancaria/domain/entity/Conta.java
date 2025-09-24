@@ -19,7 +19,6 @@ import java.util.List;
         @UniqueConstraint(name = "uk_cliente_tipo", columnNames = {"cliente_id", "tipo_conta"})
     }
 )
-
 @SuperBuilder
 @NoArgsConstructor
 public abstract class Conta{
