@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@MappedSuperclass
 @Data
 @DiscriminatorValue("POUPANCA")
 @SuperBuilder
