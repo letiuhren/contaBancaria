@@ -1,7 +1,10 @@
 package com.senai.contaBancaria.interface_ui.controller;
 
-import com.senai.contaBancaria.apliation.dto.ContaResumoDTO;
-import com.senai.contaBancaria.apliation.service.ContaService;
+import com.senai.contaBancaria.aplication.dto.ContaAtualizacaoDTO;
+import com.senai.contaBancaria.aplication.dto.ContaResumoDTO;
+import com.senai.contaBancaria.aplication.dto.TransferenciaDTO;
+import com.senai.contaBancaria.aplication.dto.ValorSaqueDepositoDTO;
+import com.senai.contaBancaria.aplication.service.ContaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +30,34 @@ public class ContaController {
 
     @PutMapping("/{numeroDaConta}")
     public ResponseEntity<ContaResumoDTO> atualizarConta(@PathVariable String numeroDaConta,
-                                                         @RequestBody ContaResumoDTO dto) {
-        return ResponseEntity.ok(service.atualizarConta(numeroDaConta, dto));
+                                                         @RequestBody ContaAtualizacaoDTO dto) {
+        return ResponseEntity.ok(service.atualizarConta(numeroDaConta,dto));
     }
+
+    @DeleteMapping("/{numeroDaConta}")
+    public ResponseEntity<Void> deletarConta(@PathVariable String numeroDaConta) {
+        service.
+                deletarConta(numeroDaConta);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{numeroDaConta}")
+    public ResponseEntity<ContaResumoDTO> sacar(@PathVariable String numeroDaConta,
+                                                         @RequestParam ValorSaqueDepositoDTO dto) {
+        return ResponseEntity.ok(service.sacar(numeroDaConta, dto));
+    }
+
+    @PutMapping("/{numeroDaConta}")
+    public ResponseEntity<ContaResumoDTO> depositar(@PathVariable String numeroDaConta,
+                                                @RequestBody ValorSaqueDepositoDTO valor) {
+    return ResponseEntity.ok(service.depositar(numeroDaConta, valor));
+    }
+
+    @PostMapping("/{numeroDaConta}transferir")
+    public ResponseEntity<ContaResumoDTO> transferir(@PathVariable String numeroDaConta,
+                                                @RequestBody TransferenciaDTO dto) {
+        return ResponseEntity.ok(service.transferir(numeroDaConta, numeroDaConta, dto));
+    }
+
 
 }

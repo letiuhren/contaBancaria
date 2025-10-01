@@ -20,11 +20,27 @@ import java.math.BigDecimal;
 public class ContaCorrente extends Conta {
     @Column(precision = 19, scale = 2)
     private BigDecimal limite;
-    @Column (precision = 19, scale = 2)
+    @Column(precision = 19, scale = 2)
     private BigDecimal taxa;
 
     @Override
     public String getTipo() {
         return "CORRENTE";
     }
+
+    @Override
+    public void sacar(BigDecimal valor) {
+        if (valor.compareTo(BigDecimal.ZERO) < 0)
+            throw new IllegalArgumentException("Valor de saque deve ser maior que zero.");
+
+
+        BigDecimal custoSaque = valor.multiply(taxa);
+        BigDecimal totalSaque = valor.add(custoSaque);
+
+        if (getSaldo().add(limite).compareTo(totalSaque) < 0)
+            throw new IllegalArgumentException("Saldo insuficiente para saque.");
+        setSaldo(getSaldo().subtract(totalSaque));
+    }
+
+
 }

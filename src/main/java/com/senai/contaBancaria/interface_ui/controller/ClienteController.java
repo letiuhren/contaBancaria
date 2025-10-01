@@ -1,8 +1,8 @@
 package com.senai.contaBancaria.interface_ui.controller;
 
-import com.senai.contaBancaria.apliation.dto.ClienteRegistroDTO;
-import com.senai.contaBancaria.apliation.dto.ClienteResponseDTO;
-import com.senai.contaBancaria.apliation.service.ClienteService;
+import com.senai.contaBancaria.aplication.dto.ClienteRegistroDTO;
+import com.senai.contaBancaria.aplication.dto.ClienteResponseDTO;
+import com.senai.contaBancaria.aplication.service.ClienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

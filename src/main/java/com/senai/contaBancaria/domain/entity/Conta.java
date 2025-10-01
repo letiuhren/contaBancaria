@@ -27,7 +27,7 @@ public abstract class Conta{
     private String id;// classe repper é o que representa, que são classes que podem ser nulas ou não
     @Column (nullable = false, length = 20)
     private String numero;
-    @Column (nullable = false, precision = 4)
+    @Column (nullable = false, precision = 20, scale = 2)
     private BigDecimal saldo;
     @Column (nullable = false)
     private boolean ativa;
@@ -38,4 +38,29 @@ public abstract class Conta{
 
     public abstract String  getTipo();
 
+    public void sacar (BigDecimal valor){
+        validarValorMaiorQueZero(valor, BigDecimal.ZERO, "Valor de saque inválido.");
+        validarValorMaiorQueZero (this.saldo (valor));
+        this.saldo = this.saldo.subtract(valor);
+    }
+
+    public void depositar(BigDecimal valor) {
+        validarValorMaiorQueZero(valor, BigDecimal.ZERO, "Valor de depósito inválido.");
+        this.saldo = this.saldo.add(valor);
+    }
+
+    private static void validarValorMaiorQueZero(BigDecimal valor) {
+        if (valor.compareTo(BigDecimal.ZERO) < 0){
+            throw new IllegalArgumentException("Valor deve ser maior que zero.");
+        }
+    }
+
+    public void tranferir(BigDecimal valor, Conta contaDestino){
+        if (this.equals(contaDestino.getId())){
+            throw new IllegalArgumentException("Não é possível transferir para a mesma conta.");
+        }
+        this.sacar(valor);
+        contaDestino.depositar(valor);
+
+    }
 }

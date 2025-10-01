@@ -1,4 +1,4 @@
-package com.senai.contaBancaria.apliation.dto;
+package com.senai.contaBancaria.aplication.dto;
 
 import com.senai.contaBancaria.domain.entity.Cliente;
 import com.senai.contaBancaria.domain.entity.Conta;

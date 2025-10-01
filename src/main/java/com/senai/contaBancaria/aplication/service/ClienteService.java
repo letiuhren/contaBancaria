@@ -1,8 +1,8 @@
-package com.senai.contaBancaria.apliation.service;
+package com.senai.contaBancaria.aplication.service;
 
 
-import com.senai.contaBancaria.apliation.dto.ClienteRegistroDTO;
-import com.senai.contaBancaria.apliation.dto.ClienteResponseDTO;
+import com.senai.contaBancaria.aplication.dto.ClienteRegistroDTO;
+import com.senai.contaBancaria.aplication.dto.ClienteResponseDTO;
 import com.senai.contaBancaria.domain.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
