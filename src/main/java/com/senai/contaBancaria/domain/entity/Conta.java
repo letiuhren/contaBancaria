@@ -52,7 +52,7 @@ public abstract class Conta{
         this.saldo = this.saldo.add(valor);
     }
 
-    private static void validarValorMaiorQueZero(BigDecimal valor, String operacao) {
+    protected static void validarValorMaiorQueZero(BigDecimal valor, String operacao) {
         if (valor.compareTo(BigDecimal.ZERO) < 0){
             throw new ValoresNegativosExecption(operacao);
         }

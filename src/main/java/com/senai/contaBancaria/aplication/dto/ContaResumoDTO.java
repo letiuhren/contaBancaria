@@ -33,7 +33,6 @@ public record ContaResumoDTO(
                     .build();
         }
         throw new TipoDeContaInvalidaException();
-        return null;
     }
     public static ContaResumoDTO fromEntity(Conta c){
         return new ContaResumoDTO(
