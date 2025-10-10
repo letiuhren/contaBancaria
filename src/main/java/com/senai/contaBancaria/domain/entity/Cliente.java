@@ -18,16 +18,7 @@ import java.util.List;
         uniqueConstraints = @UniqueConstraint(name="uk_cliente_cpf", columnNames = "cpf")
 )
 
-public class Cliente {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
-
-    @Column (nullable = false, length = 120)
-    private String nome;
-
-    @Column (nullable = false, length = 11)
-    private String cpf;
+public class Cliente extends Usuario {
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     //cascade para criar o relacionamnto entre cliente e conta, criando simultaneamente. Além de, quando apagar o cliente, apagar todas as contas relacionadas.
