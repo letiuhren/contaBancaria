@@ -4,16 +4,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.MappedSuperclass;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @DiscriminatorValue("POUPANCA")
 @SuperBuilder
 @NoArgsConstructor

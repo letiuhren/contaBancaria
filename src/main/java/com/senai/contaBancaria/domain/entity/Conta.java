@@ -5,14 +5,17 @@ import com.senai.contaBancaria.domain.exceptions.TransferenciaParaMesmaContaExce
 import com.senai.contaBancaria.domain.exceptions.ValoresNegativosExecption;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
 
 @Entity
-@Data
+@Getter
+@Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_conta", discriminatorType = DiscriminatorType.STRING, length = 20)
 @Table (name = "conta",

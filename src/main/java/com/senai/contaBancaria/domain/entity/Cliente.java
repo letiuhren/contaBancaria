@@ -1,18 +1,17 @@
 package com.senai.contaBancaria.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Table(
         name = "cliente",
         uniqueConstraints = @UniqueConstraint(name="uk_cliente_cpf", columnNames = "cpf")

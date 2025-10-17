@@ -5,9 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.MappedSuperclass;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
@@ -15,7 +13,8 @@ import java.math.BigDecimal;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @DiscriminatorValue("CORRENTE")
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 public class ContaCorrente extends Conta {
