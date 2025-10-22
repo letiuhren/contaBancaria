@@ -2,7 +2,8 @@ package com.senai.contaBancaria.Infrastructure.Security;
 
 import com.senai.contaBancaria.domain.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

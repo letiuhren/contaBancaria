@@ -3,10 +3,14 @@ package com.senai.contaBancaria.Infrastructure.Config;
 import com.senai.contaBancaria.domain.entity.Gerente;
 import com.senai.contaBancaria.domain.enums.Role;
 import com.senai.contaBancaria.domain.repository.GerenteRepository;
-import lombok.Value;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
+@Component
+@RequiredArgsConstructor
 public class AdminBootstrap implements CommandLineRunner {
 
     private final GerenteRepository gerenteRepository;
@@ -18,13 +22,14 @@ public class AdminBootstrap implements CommandLineRunner {
     @Value("${sistema.admin.senha}")
     private String adminSenha;
 
+
     @Override
     public void run(String... args) {
         gerenteRepository.findByEmail(adminEmail).ifPresentOrElse(
                 gerent -> {
-                    if (!gerent.isAtiva()) {
-                        gerent.setAtiva(true);
-                        gerenteRepository.(gerent);
+                    if (!gerent.isAtivo()) {
+                        gerent.setAtivo(true);
+                        gerenteRepository.save(gerent);
                     }
                 },
                 () -> {

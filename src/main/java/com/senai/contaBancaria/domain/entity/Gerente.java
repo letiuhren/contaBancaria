@@ -1,23 +1,22 @@
 package com.senai.contaBancaria.domain.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@SuperBuilder
 @Entity
+@Table(name="gerente")
+public class Gerente extends Usuario{
 
-@Table(
-        name = "gerente",
-        uniqueConstraints = @UniqueConstraint(name="uk_gerente_cpf", columnNames = "cpf")
-)
-public class Gerente extends Usuario {
-
-    public static Object builder() {
-        return null;
-    }
 }

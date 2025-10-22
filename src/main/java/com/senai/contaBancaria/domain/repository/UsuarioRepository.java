@@ -1,7 +1,11 @@
 package com.senai.contaBancaria.domain.repository;
 
-import java.lang.ScopedValue;
+import com.senai.contaBancaria.domain.entity.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UsuarioRepository {
-    <T> ScopedValue<T> findByEmail(String email);
+
+import java.util.Optional;
+
+public interface UsuarioRepository extends JpaRepository <Usuario, String> {
+    Optional <Usuario> findByEmail(String email);
 }

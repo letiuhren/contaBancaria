@@ -1,7 +1,6 @@
 package com.senai.contaBancaria.domain.entity;
 
 import com.senai.contaBancaria.domain.enums.Role;
-import com.senai.modelo_autenticacao_autorizacao.domain.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -16,7 +15,6 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED) // estratégia JOINED
 public abstract class Usuario {
 

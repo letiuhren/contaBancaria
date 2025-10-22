@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public record ClienteRegistroDTO(
         @NotBlank String nome,
         @NotNull String cpf,
-        @NotBlank @Email String email,
+        @NotBlank String email,
         @NotBlank String senha,
         @NotNull Role role,
         ContaResumoDTO contaDTO
@@ -24,7 +24,7 @@ public record ClienteRegistroDTO(
                 .cpf(this.cpf)
                 .email(this.email)
                 .senha(this.senha)
-                .role(this.role)
+                .role(Role.CLIENTE)
                 .contas(new ArrayList<>())
                 .build();
     }
