@@ -14,9 +14,7 @@ public record TaxaDTO (
         @NotBlank(message = "Descrição é obrigatória")
         @Schema(description = "Nome da taxa", example = "Tarifa Bancária")
         String descricao,
-        @NotNull (message = "Percentual da taxa é obrigatório")
-        @Schema(description = "Percentual da taxa", example = "0.5%")
-        BigDecimal percentual
+
 ) {
 
 }

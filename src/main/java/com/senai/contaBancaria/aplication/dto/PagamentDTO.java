@@ -7,9 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public record PagamentDTO (
-        @NotNull(message = "Id é obrigatório")
-        @Schema(description = "Id", example = "01")
-        String id,
 
         @NotNull(message = "Conta é obrigatório")
         @Schema(description = "Especificar a conta", example = "Poupança")
@@ -25,14 +22,7 @@ public record PagamentDTO (
 
         @NotNull(message = "Data do pagamento é obrigatório")
         @Schema(description = "Informar a data do pagamento", example = "01-09-2025")
-        String dataPagamento,
+        String dataPagamento
 
-        @NotNull(message = "Status é obrigatório")
-        @Schema(description = "Informar o status do pagamento", example = "Pagamento efetuado com sucesso")
-        Enum status,
-
-        @NotNull(message = "Taxa é obrigatório")
-        @Schema(description = "Taxa do pagamento", example = "R$ 3.00")
-        BigDecimal taxa
 ){
 }
