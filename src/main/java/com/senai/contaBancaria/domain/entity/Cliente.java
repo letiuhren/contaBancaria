@@ -25,4 +25,7 @@ public class Cliente extends Usuario {
     @Column (nullable = false)
     private boolean ativo;//indica se a conta/cliente está ativo ou inativo
 
+    @OneToOne(mappedBy = "cliente")
+    private DispositivoIOT dispositivo;
+
 }

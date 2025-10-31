@@ -31,9 +31,10 @@ public class Pagamento {
     String dataPagamento;
 
     @NotBlank
-    String status;
+    Enum status;
 
     @NotNull
+    @ManyToMany
     BigDecimal taxa;
 
 }
