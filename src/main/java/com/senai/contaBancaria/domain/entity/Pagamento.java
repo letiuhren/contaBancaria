@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,7 +26,7 @@ public class Pagamento {
     String boleto;
 
     @NotNull
-    String valorPago;
+    BigDecimal valorPago;
 
     @NotNull
     String dataPagamento;
@@ -35,6 +36,6 @@ public class Pagamento {
 
     @NotNull
     @ManyToMany
-    BigDecimal taxa;
+    List<Taxa> taxas;
 
 }

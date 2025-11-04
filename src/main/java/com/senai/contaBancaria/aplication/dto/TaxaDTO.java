@@ -13,8 +13,10 @@ public record TaxaDTO (
         String id,
         @NotBlank(message = "Descrição é obrigatória")
         @Schema(description = "Nome da taxa", example = "Tarifa Bancária")
-        String descricao
-
+        String descricao,
+        @NotNull (message = "Percentual é obrigatório" )
+        @Schema(description = "Percentual da taxa aplicada",example = "0.05")
+        BigDecimal percentual
 ) {
 
 }
