@@ -13,7 +13,7 @@ public record TaxaDTO (
         String id,
         @NotBlank(message = "Descrição é obrigatória")
         @Schema(description = "Nome da taxa", example = "Tarifa Bancária")
-        String descricao,
+        String descricao
 
 ) {
 
