@@ -1,24 +1,25 @@
-package com.senai.contaBancaria.domain.service;
+package com.senai.contaBancaria.aplication.service;
 
 import com.senai.contaBancaria.domain.entity.Conta;
 import com.senai.contaBancaria.domain.entity.Pagamento;
-import com.senai.contaBancaria.domain.entity.Taxa;
-import com.senai.contaBancaria.domain.exceptions.SaldoInsuficienteException;
+import com.senai.contaBancaria.domain.enums.StatusPagamento;
 import com.senai.contaBancaria.domain.repository.ContaRepository;
+import com.senai.contaBancaria.domain.repository.PagamentoRepository;
+import com.senai.contaBancaria.domain.service.PagamentoDomainService;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 
 public class PagamentoAppService {
     private final ContaRepository contaRepository;
     private final PagamentoDomainService domainService;
+    private final PagamentoRepository pagamentoRepository;
 
     public PagamentoAppService(ContaRepository contaRepository,
-                               PagamentoDomainService domainService) {
+                               PagamentoDomainService domainService,
+                               PagamentoRepository pagamentoRepository) {
         this.contaRepository = contaRepository;
         this.domainService = domainService;
+        this.pagamentoRepository = pagamentoRepository;
     }
 
     public String efetuarPagamento(Pagamento pagamento) {
@@ -35,6 +36,10 @@ public class PagamentoAppService {
         // Atualiza saldo e salva no banco
         conta.setSaldo(conta.getSaldo().subtract(total));
         contaRepository.save(conta);
+
+
+        pagamento.setStatus(StatusPagamento.APROVADO);
+        pagamentoRepository.save(pagamento);
 
         // Retorna mensagem de confirmação
         return "Pagamento realizado com sucesso! Total debitado: R$ " + total;

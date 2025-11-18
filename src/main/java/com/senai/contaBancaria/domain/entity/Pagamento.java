@@ -20,19 +20,19 @@ public class Pagamento {
 
     @ManyToOne
     @JoinColumn(name = "conta_id")
-    String conta;
+    private Conta conta;
 
     @NotBlank
-    String boleto;
+    private String boleto;
 
     @NotNull
-    BigDecimal valorPago;
+    private BigDecimal valorPago;
 
     @NotNull
-    String dataPagamento;
+    private String dataPagamento;
 
     @NotBlank
-    Enum status;
+    private Enum status;
 
     @NotNull
     @ManyToMany

@@ -4,7 +4,6 @@ import com.senai.contaBancaria.domain.entity.Conta;
 import com.senai.contaBancaria.domain.entity.Pagamento;
 import com.senai.contaBancaria.domain.entity.Taxa;
 import com.senai.contaBancaria.domain.exceptions.SaldoInsuficienteException;
-import com.senai.contaBancaria.domain.repository.ContaRepository;
 
 import java.math.BigDecimal;
 import java.util.Collections;

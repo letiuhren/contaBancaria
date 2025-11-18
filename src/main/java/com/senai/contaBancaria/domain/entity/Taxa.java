@@ -2,6 +2,9 @@ package com.senai.contaBancaria.domain.entity;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -14,13 +17,15 @@ import java.math.BigDecimal;
 @Entity
 
 public class Taxa {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @NotNull
 
-    String id;
+    private String id;
     @NotBlank
 
-    String descricao;
+    private String descricao;
     @NotNull
 
-    BigDecimal percentual;
+    private BigDecimal percentual;
 }
