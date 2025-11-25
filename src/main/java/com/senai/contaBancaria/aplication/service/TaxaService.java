@@ -34,7 +34,7 @@ public class TaxaService {
 
     }
 
-    private Taxa buscarTaxaPorId(String id) {
+    public Taxa buscarTaxaPorId(String id) {
 
         return repository.findById(id).orElseThrow(
                 () -> new EntidadeNaoEncontradaException("Taxa com ID " + id)

@@ -4,6 +4,7 @@ import com.senai.contaBancaria.aplication.dto.ClienteRegistroDTO;
 import com.senai.contaBancaria.aplication.dto.TaxaDTO;
 import com.senai.contaBancaria.aplication.dto.TaxaResponseDTO;
 import com.senai.contaBancaria.aplication.service.TaxaService;
+import com.senai.contaBancaria.domain.entity.Taxa;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,11 +12,16 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+
+@RestController
+@RequestMapping ("/api/taxas")
+@RequiredArgsConstructor
 
 public class TaxaController {
 
@@ -39,6 +45,7 @@ public class TaxaController {
                             )
                     )
             ),
+
             responses = {
                     @ApiResponse(responseCode = "201", description = "Taxa cadastrada com sucesso"),
                     @ApiResponse(
@@ -54,7 +61,7 @@ public class TaxaController {
             }
     )
     @PostMapping
-    public ResponseEntity<TaxaResponseDTO> registrarCliente(@RequestBody TaxaDTO dto){
+    public ResponseEntity<TaxaResponseDTO> registrarTaxa(@RequestBody TaxaDTO dto){
         TaxaResponseDTO novaTaxa= service.registrarTaxa(dto);
         return ResponseEntity.created(
                 URI.create("/api/taxa/id"+ novaTaxa.id())
@@ -77,30 +84,32 @@ public class TaxaController {
             summary = "Buscar taxa por ID",
             description = "Retorna uma taxa existente a partir do seu id",
             parameters = {
-                    @Parameter(name = "id", description = "CPF do cliente a ser buscado", example = "123.123.123-00")
+                    @Parameter(name = "id", description = "Id da taxa a ser buscada", example = "1")
             },
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Cliente encontrado"),
+                    @ApiResponse(responseCode = "200", description = "Taxa encontrada"),
                     @ApiResponse(
                             responseCode = "404",
-                            description = "Cliente não encontrado",
+                            description = "Taxa não encontrada",
                             content = @Content(
                                     mediaType = "application/json",
-                                    examples = @ExampleObject(value = "\"Cliente com cpf 000.000.00-000 não encontrado.\"")
+                                    examples = @ExampleObject(value = "\"Taxa com id 1 não encontrada.\"")
                             )
                     )
             }
     )
-    @GetMapping("/cpf/{cpf}")
-    public ResponseEntity<TaxaResponseDTO> buscarClienteAtivoPorCpf(@PathVariable String cpf){
-        return ResponseEntity.ok(service.buscarClienteAtivoPorCpf(cpf));
+    @GetMapping("/id/{id}")
+
+    public ResponseEntity<Taxa> buscarTaxaPorId(@PathVariable String id){
+
+        return ResponseEntity.ok(service.buscarTaxaPorId(id));
     }
 
     @Operation(
-            summary = "Atualizar um cliente",
-            description = "Atualiza os dados de um cliente existente com novas informações",
+            summary = "Atualizar uma taxa",
+            description = "Atualiza os dados de uma taxa existente com novas informações",
             parameters = {
-                    @Parameter(name = "CPF", description = "CPF do cliente a ser atualizado", example = "123.123.123-00")
+                    @Parameter(name = "Id", description = "Id da taxa a ser atualizada", example = "1")
             },
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     required = true,
@@ -108,68 +117,68 @@ public class TaxaController {
                             schema = @Schema(implementation = ClienteRegistroDTO.class),
                             examples = @ExampleObject(name = "Exemplo de atualização", value = """
                         {
-                          "id": 1,
-                          "nome": "João Silva",
-                          "cpf": "123.456.789-00",
-                          "email": josilva@gmail.com",
-                          "senha": "novaSenhaSegura123"
-                        }
+                          {
+                                          "id": 1,
+                                          "descricao" : "taxaBoleto",
+                                          "Percentual" : 0.5,
+                                          "valor fixo" : 5.00
+                                        }
                     """)
                     )
             ),
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Cliente atualizado com sucesso"),
+                    @ApiResponse(responseCode = "200", description = "Taxa atualizada com sucesso"),
                     @ApiResponse(
                             responseCode = "400",
                             description = "Erro de validação",
                             content = @Content(
                                     mediaType = "application/json",
                                     examples = {
-                                            @ExampleObject(name = "Cliente inválido", value = "\"Dados inválidos\""),
+                                            @ExampleObject(name = "Taxa inválida", value = "\"Dados inválidos\""),
                                     }
                             )
                     ),
                     @ApiResponse(
                             responseCode = "404",
-                            description = "Cliente não encontrado",
+                            description = "Taxa não encontrada",
                             content = @Content(
                                     mediaType = "application/json",
-                                    examples = @ExampleObject(value = "\"Cliente com CPF 000.000.000-0 não encontrado.\"")
+                                    examples = @ExampleObject(value = "\"Taxa com id 1 não encontrada.\"")
                             )
                     )
             }
     )
-    @PutMapping("/cpf/{cpf}")
-    public ResponseEntity<TaxaResponseDTO> atualizarCliente(@PathVariable String cpf,
-                                                               @RequestBody ClienteRegistroDTO dto) {
-        return ResponseEntity.ok(service.atualizarCliente(cpf, dto));
+    @PutMapping("/id/{id}")
+    public ResponseEntity<TaxaResponseDTO> atualizarTaxaPorId(@PathVariable String id,
+                                                               @RequestBody TaxaDTO dto) {
+        return ResponseEntity.ok(service.atualizarTaxa(id, dto));
     }
 
     @Operation(
-            summary = "Deletar um cliente",
-            description = "Remove um cliente da base de dados a partir do seu CPF",
+            summary = "Deletar uma taxa",
+            description = "Remove uma taxa da base de dados a partir do seu id",
             parameters = {
-                    @Parameter(name = "CPF", description = "CPF do cliente a ser deletado", example = "1")
+                    @Parameter(name = "Id", description = "Id da taxa a ser deletada", example = "1")
             },
             responses = {
-                    @ApiResponse(responseCode = "204", description = "cliente removido com sucesso"),
+                    @ApiResponse(responseCode = "204", description = "Taxa removida com sucesso"),
                     @ApiResponse(
                             responseCode = "404",
-                            description = "Cliente não encontrado",
+                            description = "Taxa não encontrada",
                             content = @Content(
                                     mediaType = "application/json",
-                                    examples = @ExampleObject(value = "\"Cliente com CPF 000.000.000-00 não encontrado.\"")
+                                    examples = @ExampleObject(value = "\"Taxa com id 1 não encontrado.\"")
                             )
                     )
             }
     )
-    @DeleteMapping("/cpf/{cpf}")
-    public ResponseEntity<Void> deletarCliente(@PathVariable String cpf){
-        service.deletarCliente(cpf);
+    @DeleteMapping("/id/{id}")
+    public ResponseEntity<Void> deletarTaxa(@PathVariable String id){
+        service.deletarTaxa(id);
         return ResponseEntity.noContent().build();
     }
 }
 
 
 
-}
+
