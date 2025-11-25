@@ -100,9 +100,12 @@ public class TaxaController {
     )
     @GetMapping("/id/{id}")
 
-    public ResponseEntity<Taxa> buscarTaxaPorId(@PathVariable String id){
-
-        return ResponseEntity.ok(service.buscarTaxaPorId(id));
+    public ResponseEntity<TaxaResponseDTO> buscarTaxaPorId(@PathVariable String id){
+        // Busca a Entidade Taxa
+        Taxa taxa = service.buscarTaxaPorId(id);
+        // Converte a Entidade para o DTO de Resposta antes de retornar
+        TaxaResponseDTO responseDTO = TaxaResponseDTO.fromEntity(taxa);
+        return ResponseEntity.ok(responseDTO);
     }
 
     @Operation(
