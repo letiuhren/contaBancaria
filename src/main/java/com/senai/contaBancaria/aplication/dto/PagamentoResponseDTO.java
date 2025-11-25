@@ -1,16 +1,18 @@
 package com.senai.contaBancaria.aplication.dto;
 
+import com.senai.contaBancaria.domain.entity.Conta;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 
-import java.math.BigDecimal;
-
-public record PagamentDTO (
+public record PagamentoResponseDTO (
+        @NotNull (message = "ID do pagamento é obrigatório")
+        @Schema(description = "ID do pagamento", example = "55")
+        String id,
 
         @NotNull(message = "Conta é obrigatório")
         @Schema(description = "Especificar a conta", example = "Poupança")
-        String conta,
+        Conta conta,
 
         @NotNull(message = "Boleto é obrigatório")
         @Schema(description = "Informar o numero do boleto", example = "2191292992")
@@ -26,3 +28,4 @@ public record PagamentDTO (
 
 ){
 }
+

@@ -28,4 +28,7 @@ public class Taxa {
     @NotNull
 
     private BigDecimal percentual;
+    @NotNull
+
+    private BigDecimal valorFixo;
 }

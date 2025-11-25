@@ -6,9 +6,11 @@ import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
-
-public record TaxaDTO (
-        @NotBlank(message = "Descrição é obrigatória")
+public record TaxaResponseDTO (
+        @NotNull(message = "ID da taxa recebido")
+        @Schema(description = "Id da taxa", example = "07")
+        String id,
+        @NotBlank(message = "Tipo de taxa")
         @Schema(description = "Nome da taxa", example = "Tarifa Bancária")
         String descricao,
         @NotNull (message = "Percentual é obrigatório" )
@@ -17,6 +19,5 @@ public record TaxaDTO (
         @NotNull (message = "Valor fixo é obrigatório" )
         @Schema(description = "Valor fixo da taxa aplicada",example = "3,00")
         BigDecimal valorFixo
-) {
-
+){
 }
