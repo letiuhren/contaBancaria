@@ -22,7 +22,9 @@ public record TaxaDTO (
         public Taxa toEntity(){
                 return Taxa.builder ()
                         .descricao(this.descricao)
-                        .
+                        .percentual(this.percentual)
+                        .valorFixo(this.valorFixo)
+                        .build();
         }
 
 }
