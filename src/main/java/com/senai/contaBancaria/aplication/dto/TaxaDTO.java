@@ -1,5 +1,6 @@
 package com.senai.contaBancaria.aplication.dto;
 
+import com.senai.contaBancaria.domain.entity.Taxa;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,5 +19,10 @@ public record TaxaDTO (
         @Schema(description = "Valor fixo da taxa aplicada",example = "3,00")
         BigDecimal valorFixo
 ) {
+        public Taxa toEntity(){
+                return Taxa.builder ()
+                        .descricao(this.descricao)
+                        .
+        }
 
 }
