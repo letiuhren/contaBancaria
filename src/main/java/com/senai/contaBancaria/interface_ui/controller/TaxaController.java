@@ -126,6 +126,7 @@ public class TaxaController {
                                           "descricao" : "taxaBoleto",
                                           "Percentual" : 0.5,
                                           "valor fixo" : 5.00
+                                          "Tipo de Pagamento" : "BOLETO"
                                         }
                     """)
                     )
