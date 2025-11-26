@@ -25,13 +25,15 @@ public class Pagamento {
     private Conta conta;
 
     @NotBlank
-    private String boleto;
+    private String descricaoPagamento;
 
     @NotNull
     private BigDecimal valorPago;
 
     @NotNull
     private String dataPagamento;
+
+    private String dataVencimento;
 
     @NotBlank
     private StatusPagamento status;

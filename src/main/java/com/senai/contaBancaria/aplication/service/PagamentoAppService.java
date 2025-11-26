@@ -5,6 +5,7 @@ import com.senai.contaBancaria.domain.entity.Pagamento;
 import com.senai.contaBancaria.domain.enums.StatusPagamento;
 import com.senai.contaBancaria.domain.repository.ContaRepository;
 import com.senai.contaBancaria.domain.repository.PagamentoRepository;
+import com.senai.contaBancaria.domain.repository.TaxaRepository;
 import com.senai.contaBancaria.domain.service.PagamentoDomainService;
 
 import java.math.BigDecimal;
@@ -13,13 +14,16 @@ public class PagamentoAppService {
     private final ContaRepository contaRepository;
     private final PagamentoDomainService domainService;
     private final PagamentoRepository pagamentoRepository;
+    private final TaxaRepository taxaRepository;
 
     public PagamentoAppService(ContaRepository contaRepository,
                                PagamentoDomainService domainService,
-                               PagamentoRepository pagamentoRepository) {
+                               PagamentoRepository pagamentoRepository,
+                               TaxaRepository taxaRepository) {
         this.contaRepository = contaRepository;
         this.domainService = domainService;
         this.pagamentoRepository = pagamentoRepository;
+        this.taxaRepository = taxaRepository;
     }
 
     public String efetuarPagamento(Pagamento pagamento) {
