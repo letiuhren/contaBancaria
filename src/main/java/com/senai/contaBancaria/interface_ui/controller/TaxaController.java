@@ -39,7 +39,8 @@ public class TaxaController {
                                           "id": 1,
                                           "descricao" : "taxaBoleto",
                                           "Percentual" : 0.5,
-                                          "valor fixo" : 3.00
+                                          "valor fixo" : 3.00,
+                                          "tipo  de pagamento": "BOLETO"
                                         }
                                     """
                             )
@@ -61,7 +62,7 @@ public class TaxaController {
             }
     )
     @PostMapping
-    public ResponseEntity<TaxaResponseDTO> registrarTaxa(@RequestBody TaxaDTO dto){
+    public ResponseEntity<TaxaResponseDTO> registrarTaxa(@org.springframework.web.bind.annotation.RequestBody TaxaDTO dto){
         TaxaResponseDTO novaTaxa= service.registrarTaxa(dto);
         return ResponseEntity.created(
                 URI.create("/api/taxa/id"+ novaTaxa.id())

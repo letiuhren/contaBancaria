@@ -1,5 +1,7 @@
 package com.senai.contaBancaria.domain.entity;
 
+import com.senai.contaBancaria.domain.enums.StatusPagamento;
+import com.senai.contaBancaria.domain.enums.TipoPagamento;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,7 +34,10 @@ public class Pagamento {
     private String dataPagamento;
 
     @NotBlank
-    private Enum status;
+    private StatusPagamento status;
+
+    private TipoPagamento tipoPag;
+
 
     @NotNull
     @ManyToMany
