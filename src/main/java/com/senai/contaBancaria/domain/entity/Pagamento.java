@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -31,7 +32,7 @@ public class Pagamento {
     private BigDecimal valorPago;
 
     @NotNull
-    private String dataPagamento;
+    private LocalDateTime dataPagamento;
 
     private String dataVencimento;
 

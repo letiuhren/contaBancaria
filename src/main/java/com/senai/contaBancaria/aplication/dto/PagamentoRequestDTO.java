@@ -4,6 +4,8 @@ import com.senai.contaBancaria.domain.entity.Conta;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDateTime;
+
 public record PagamentoRequestDTO (
 
         @NotNull(message = "Conta é obrigatório")
