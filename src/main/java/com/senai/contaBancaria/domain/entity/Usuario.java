@@ -24,6 +24,7 @@ public abstract class Usuario {
 
     @NotBlank
     @Column(nullable = false)
+
     protected String nome;
 
     @NotBlank

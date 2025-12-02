@@ -62,7 +62,7 @@ public abstract class Conta{
     }
 
     public void tranferir(BigDecimal valor, Conta contaDestino){
-        if (this.equals(contaDestino.getId())){
+        if (this.id.equals(contaDestino.getId())){
             throw new TransferenciaParaMesmaContaException();
         }
         this.sacar(valor);

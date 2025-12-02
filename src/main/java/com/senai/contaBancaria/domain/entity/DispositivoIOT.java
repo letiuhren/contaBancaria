@@ -1,8 +1,6 @@
 package com.senai.contaBancaria.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -13,12 +11,13 @@ import lombok.Setter;
 @Entity
 
 public class DispositivoIOT  {
-    @NotNull  String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    String id;
     @NotNull  int codigoSerial;
     @NotNull  String chavePublica;
-    @NotBlank Boolean ativo;
 
     @OneToOne
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    @JoinColumn(name = "cliente_id", unique = true)
     private Cliente cliente;
 }

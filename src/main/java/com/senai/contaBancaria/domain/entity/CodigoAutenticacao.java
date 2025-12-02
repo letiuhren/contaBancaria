@@ -1,6 +1,9 @@
 package com.senai.contaBancaria.domain.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -12,8 +15,12 @@ import java.util.Date;
 @Setter
 @Entity
 
+
 public class CodigoAutenticacao {
-    @NotNull String id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    String id;
     @NotNull String codigo;
     @NotNull Date expiraEm;
     @NotNull Boolean validade;

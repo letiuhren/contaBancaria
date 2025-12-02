@@ -45,13 +45,24 @@ public class ContaService {
     public ContaResumoDTO atualizarConta(String numeroConta, ContaAtualizacaoDTO dto) {
         var conta = buscarContaAtivoPorNumero(numeroConta);
 
-        if(conta instanceof ContaPoupanca poupanca){
-            poupanca.setRendimento(dto.rendimento());
+        if (conta instanceof ContaPoupanca poupanca) {
+            if (dto.rendimento() != null) {
+                poupanca.setRendimento(dto.rendimento());
+            }
         } else if (conta instanceof ContaCorrente corrente) {
-            corrente.setLimite(dto.limite());
-            corrente.setTaxa(dto.taxa());
+            if (dto.limite() != null) {
+                corrente.setLimite(dto.limite());
+            }
+            if (dto.taxa() != null) {
+                corrente.setTaxa(dto.taxa());
+            }
         }
-        conta.setSaldo(dto.saldo());
+
+        // Saldo é genérico e também deve ser opcional
+        if (dto.saldo() != null) {
+            conta.setSaldo(dto.saldo());
+        }
+
         return ContaResumoDTO.fromEntity(repository.save(conta));
     }
 
