@@ -23,7 +23,7 @@ public record ClienteRegistroDTO(
         @NotBlank (message = "Senha é obrigatória")
         @Schema(description = "Senha", example = "1254125412544")
         String senha,
-        @NotNull Role role,
+
 
 
         ContaResumoDTO contaDTO

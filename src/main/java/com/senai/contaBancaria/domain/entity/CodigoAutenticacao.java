@@ -1,9 +1,6 @@
 package com.senai.contaBancaria.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -24,6 +21,8 @@ public class CodigoAutenticacao {
     @NotNull String codigo;
     @NotNull Date expiraEm;
     @NotNull Boolean validade;
-    @NotBlank Cliente cliente;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "cliente_id", foreignKey = @ForeignKey(name = "fk_codigoaut_cliente"))
+    private Cliente cliente;
 }
