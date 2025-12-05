@@ -1,7 +1,7 @@
 package com.senai.contaBancaria.domain.entity;
 
 
-import com.senai.contaBancaria.aplication.dto.TaxaDTO;
+
 import com.senai.contaBancaria.domain.enums.TipoPagamento;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
