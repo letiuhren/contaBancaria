@@ -1,23 +1,27 @@
 package com.senai.contaBancaria.domain.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+
 @Entity
-
-public class DispositivoIOT  {
+@Data
+@Table(name = "dispositivo_iot")
+public class  DispositivoIOT {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    String id;
-    @NotNull  int codigoSerial;
-    @NotNull  String chavePublica;
+    private String id; // Identificador único do dispositivo
+
+    @Column(nullable = false, unique = true, length = 100)
+    private String codigoSerial; // Número de série único do dispositivo
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String chavePublica; // Chave pública usada na comunicação segura
+
+    @Column(nullable = false)
+    private Boolean ativo; // Indica se o dispositivo está ativo
 
     @OneToOne
-    @JoinColumn(name = "cliente_id", unique = true)
-    private Cliente cliente;
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente cliente; // Relacionamento com o cliente proprietário do dispositivo
 }

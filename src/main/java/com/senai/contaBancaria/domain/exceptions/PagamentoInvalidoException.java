@@ -5,4 +5,5 @@ package com.senai.contaBancaria.domain.exceptions;
 
             super("O pagamento informado é inválido");
         }
+
     }

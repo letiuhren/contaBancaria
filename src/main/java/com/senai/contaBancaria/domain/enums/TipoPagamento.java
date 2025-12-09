@@ -1,5 +1,5 @@
 package com.senai.contaBancaria.domain.enums;
 
 public enum TipoPagamento {
-    BOLETO, CARTAO, EMPRESTIMO
+    BOLETO, CARTAO, DEPOSITO,
 }

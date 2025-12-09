@@ -34,12 +34,12 @@ public class Pagamento {
     @NotNull
     private LocalDateTime dataPagamento;
 
-    private String dataVencimento;
+    private LocalDateTime dataVencimento;
 
     @NotBlank
     private StatusPagamento status;
 
-    private TipoPagamento tipoPag;
+    private TipoPagamento tipoPagamento;
 
 
     @NotNull
